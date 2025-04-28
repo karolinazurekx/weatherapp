@@ -197,8 +197,4 @@ docker image inspect weather-app2 --format='{{.Size}}'
 
 ---
 
-## 5. Linki do repozytoriów
 
-- GitHub: https://github.com/karolinazurekx/weatherapp
-
----
