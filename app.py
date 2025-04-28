@@ -3,28 +3,28 @@ import requests
 import logging
 from datetime import datetime
 
-# Konfiguracja logowania
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Informacje o autorze i porcie
+
 AUTHOR = "Karolina Żurek"
 PORT = 5000
 
-# Flask app
+
 app = Flask(__name__)
 
-# Klucz API OpenWeatherMap (trzeba go uzyskać z https://openweathermap.org/api)
+
 API_KEY = "3e0d5569920c03e5fb6f86d3d9775e39"
 
-# Lista krajów i miast
+
 LOCATIONS = {
     "Poland": ["Warsaw", "Krakow", "Gdansk"],
     "USA": ["New York", "Los Angeles", "Chicago"],
     "Germany": ["Berlin", "Munich", "Hamburg"]
 }
 
-# Logowanie informacji o starcie aplikacji
+
 logger.info(f"Application started on {datetime.now()}")
 logger.info(f"Author: {AUTHOR}")
 logger.info(f"Listening on TCP port: {PORT}")
@@ -40,11 +40,11 @@ def index():
         selected_country = request.form.get("country")
         selected_city = request.form.get("city")
 
-        # Pobieranie listy miast dla wybranego kraju
+        
         if selected_country in LOCATIONS:
             cities = LOCATIONS[selected_country]
 
-        # Pobieranie informacji o pogodzie
+        
         if selected_country and selected_city:
             weather_info = get_weather(selected_city)
 
