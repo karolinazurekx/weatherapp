@@ -3,7 +3,7 @@
 
 ---
 
-##  Aplikacja pogodowa 
+## 1. Aplikacja pogodowa 
 ### Funkcjonalność
 
 - Po uruchomieniu kontenera aplikacja zapisuje w logach:
