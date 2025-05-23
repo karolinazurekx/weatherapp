@@ -2,9 +2,9 @@ name: Build & Push Multiarch Docker Image with CVE scan
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
   IMAGE_NAME: ghcr.io/karolinazurekx/${{ github.event.repository.name }}
