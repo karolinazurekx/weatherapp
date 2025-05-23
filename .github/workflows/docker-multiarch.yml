@@ -61,7 +61,7 @@ jobs:
           outputs: type=docker,dest=/tmp/image.tar
 
       - name: Scan image for CVEs (Trivy)
-        uses: aquasecurity/trivy-action@v0.21.3
+        uses: aquasecurity/trivy-action@master
         with:
           input: /tmp/image.tar
           exit-code: 1
