@@ -45,30 +45,29 @@ jobs:
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Build image (multiarch, with cache)
-        id: build-image
+      # Budujemy obraz tylko dla jednej architektury (amd64) do pliku .tar - do skanowania Trivy
+      - name: Build amd64 image for scan
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: false
-          platforms: linux/amd64,linux/arm64
-          tags: |
-            ${{ env.IMAGE_NAME }}:latest
-            ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
+          platforms: linux/amd64
+          tags: ${{ env.IMAGE_NAME }}:scan
           cache-from: type=registry,ref=${{ env.CACHE_IMAGE }}
           cache-to: type=registry,ref=${{ env.CACHE_IMAGE }},mode=max
           outputs: type=docker,dest=/tmp/image.tar
 
       - name: Scan image for CVEs (Trivy)
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.21.3
         with:
           input: /tmp/image.tar
           exit-code: 1
           severity: CRITICAL,HIGH
           ignore-unfixed: true
 
-      - name: Push image to GHCR (only if scan passes)
+      # Budujemy i wypychamy multiarch obraz do GHCR tylko jeśli scan przejdzie
+      - name: Build and push multiarch image
         if: success()
         uses: docker/build-push-action@v5
         with:
