@@ -1,2 +1,3 @@
 Flask
 requests
+setuptools>=78.1.1
