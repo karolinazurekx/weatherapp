@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/karolinazurekx/${{ github.event.repository.name }}
-  CACHE_IMAGE: docker.io/karolinazurekx/${{ github.event.repository.name }}:buildcache
+  CACHE_IMAGE: docker.io/karolinazurek/weather-app:buildcache
 
 jobs:
   build-and-push:
